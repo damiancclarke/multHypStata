@@ -1,9 +1,9 @@
-/* multHyp.do                    damiancclarke             yyyy-mm-dd:2021-11-10
+/* multHyp.do                    damiancclarke             yyyy-mm-dd:2022-04-20
 ----|----1----|----2----|----3----|----4----|----5----|----6----|----7----|----8
 
   This code runs some simulations and conducts multiple hypothesis test correct-
-ions for a talk at the Stata Economics Symposium:
-     "Multiple Hypothesis Testing in Stata"
+ions for a talk at University of Wisconsin-Madison:
+     "Correcting for Multiple Hypothesis Testing"
        by: Damian Clarke
 
   This code replicates results shown in the slides using a range of procedures
@@ -21,7 +21,7 @@ not installed, the code will fail to run.
 ions, the locals defined as S below could be set at lower values. Throughout the
 code, the local S sets the number of simulations, while the local B sets the nu-
 mber of boottsrap replicates.
-
+OB
   Contact email: dclarke@fen.uchile.cl
 
 */
@@ -45,7 +45,7 @@ if _rc!=0 {
     net from http://www.stata-journal.com/software/sj10-4
     net install st0035_1
 }
-cap which plotplainblind
+cap which scheme-plotplain.scheme
 if _rc!=0 ssc install blindschemes
 
 cap mkdir results
@@ -56,7 +56,7 @@ set scheme plotplainblind
 *-------------------------------------------------------------------------------
 set seed 1213
 local S = 5000
-
+local S = 100
 **Consider up to K=10 depdendent variables (Table on slide 2)
 foreach K of numlist 1(1)10 {
     local reject`K' = 0
